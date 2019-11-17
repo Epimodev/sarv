@@ -9,10 +9,10 @@
     "module"
   ],
   "bin": {
-    "sarv": "./module/src/index.js"
+    "sarv": "./module/index.js"
   },
   "scripts": {
-    "sarv": "./module/src/index.js",
+    "sarv": "./module/index.js",
     "lint": "eslint --env node src/**/*.ts",
     "build": "rm -rf module && tsc",
     "pre-commit": "lint-staged",
