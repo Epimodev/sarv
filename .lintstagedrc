@@ -1,0 +1,7 @@
+{
+  "src/**/*.ts": [
+    "prettier --write",
+    "eslint --env node --quiet",
+    "git add"
+  ]
+}
