@@ -6,7 +6,7 @@
   "author": "Frederic Godin",
   "license": "MIT",
   "files": [
-    "./module"
+    "module"
   ],
   "bin": {
     "sarv": "./module/src/index.js"
