@@ -1,5 +1,6 @@
 import { Middleware, Request, Response } from 'polka';
 import colors from 'kleur';
+import { formatFileSize } from './utils';
 
 /**
  * Check if a value contains a logInfo key
@@ -100,19 +101,9 @@ function getEncoding(res: Response): string {
  * @return formatted content length
  */
 function formatContentLength(contentLength: number): string {
-  const ONE_MEGABYTES = 1000000;
-  const ONE_KILOBYTES = 1000;
-  let value = contentLength;
-  let suffix = 'B';
-  if (contentLength >= ONE_MEGABYTES) {
-    value = contentLength / ONE_MEGABYTES;
-    suffix = 'MB';
-  } else if (contentLength >= ONE_KILOBYTES) {
-    value = contentLength / ONE_KILOBYTES;
-    suffix = 'KB';
-  }
+  const fileSize = formatFileSize(contentLength);
 
-  return colors.cyan(`${value.toFixed(1)} ${suffix}`.padStart(9));
+  return colors.cyan(fileSize.padStart(9));
 }
 
 /**

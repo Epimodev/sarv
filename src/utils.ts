@@ -18,6 +18,28 @@ export function parseIntValue(value: string | undefined): number | undefined {
 }
 
 /**
+ * Format file size
+ *
+ * @param size - file size
+ * @return formatted file size
+ */
+export function formatFileSize(size: number): string {
+  const ONE_MEGABYTES = 1000000;
+  const ONE_KILOBYTES = 1000;
+  let value = size;
+  let suffix = ' B';
+  if (size >= ONE_MEGABYTES) {
+    value = size / ONE_MEGABYTES;
+    suffix = 'MB';
+  } else if (size >= ONE_KILOBYTES) {
+    value = size / ONE_KILOBYTES;
+    suffix = 'KB';
+  }
+
+  return `${value.toFixed(1)} ${suffix}`;
+}
+
+/**
  * Print message when server is ready
  *
  * @param path - serving directory path

@@ -10,7 +10,7 @@ import { parseIntValue, printReadyMessage } from './utils';
 import { StaticServerOptions } from './types';
 
 sade('sarv [dir]', true)
-  .version('1.0.2')
+  .version('1.1.0')
   .describe('Run a static file server')
   .example('public')
   .example('public --port 8080')
