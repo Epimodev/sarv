@@ -15,12 +15,12 @@ sade('sarv [dir]', true)
   .example('public')
   .example('public --port 8080')
   .example('public --fallback /index.html')
-  .option('-h, --host', 'Hostname to bind', 'localhost')
+  .option('--host', 'Hostname to bind', 'localhost') // no -h because it's use for help
   .option('-p, --port', 'Port to bind', 3000)
   .option('-i, --index', 'Define index file name', 'index.html')
   .option('-f, --fallback', 'Define fallback file')
   .option('-m, --maxage', 'Define max-age value (in sec) in "Cache-Control" header', 1209600) // 2 weeks in seconds
-  .option('-v, --verbose', 'Display content encoding and content length in logs')
+  .option('--verbose', 'Display content encoding and content length in logs') // no -v because it's use for version
   .action(startServer)
   .parse(process.argv);
 
