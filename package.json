@@ -1,6 +1,6 @@
 {
   "name": "@epimodev/sarv",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "a static file server to serve spa with compressed files, based on polka and inspired by sirv",
   "repository": "Epimodev/sarv",
   "author": "Frederic Godin",
