@@ -26,22 +26,17 @@ sade('sarv-compress <dir>', true)
   .version('1.1.0')
   .describe('Compress text files')
   .example('public')
+  .option('--skip-confirm', 'Skip confirmation prompt (for CI)')
   .action(run)
   .parse(process.argv);
 
-async function run(dir: string) {
+async function run(dir: string, options: { [key: string]: string | undefined }) {
   const dirname = dir ? path.resolve(dir) : path.resolve();
+  const skipConfirm = !!options['skip-confirm'];
 
   const files = await getCompressableFiles(dirname);
 
-  logCompressibleFiles(dirname, files);
-
-  const { confirm }: { confirm: boolean } = await prompts({
-    name: 'confirm',
-    type: 'confirm',
-    initial: true,
-    message: 'Are you sure to create compressed version (gzip and brotli)?',
-  });
+  const confirm = skipConfirm ? true : await promptConfirmation(dirname, files);
 
   if (confirm) {
     const startTime = Date.now();
@@ -51,6 +46,26 @@ async function run(dir: string) {
 
     logCompressSuccess(compressedFiles, duration);
   }
+}
+
+/**
+ * Prompt compression confirmation
+ *
+ * @param dirname - dirname to compress
+ * @param files - compressible files
+ * @return true if user confirm
+ */
+async function promptConfirmation(dirname: string, files: CompressibleFile[]): Promise<boolean> {
+  logCompressibleFiles(dirname, files);
+
+  const { confirm }: { confirm: boolean } = await prompts({
+    name: 'confirm',
+    type: 'confirm',
+    initial: true,
+    message: 'Are you sure to create compressed version (gzip and brotli)?',
+  });
+
+  return confirm;
 }
 
 /**
